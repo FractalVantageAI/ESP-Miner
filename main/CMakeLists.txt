@@ -31,6 +31,7 @@ SRCS
     "./power/INA260.c"
     "./power/power.c"
     "./power/vcore.c"
+    "./power/voltage_breathing.c"
 
 INCLUDE_DIRS
     "."
