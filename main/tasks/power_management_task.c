@@ -14,8 +14,13 @@
 #include "PID.h"
 #include "power.h"
 #include "asic.h"
+#include "esp_timer.h"
+#include "voltage_breathing.h"
 
-#define POLL_RATE 1800
+#define POLL_RATE_NORMAL 1800
+#define POLL_RATE_BREATHING 600
+#define BREATH_FREQ 540
+#define BREATH_VCORE 1073
 #define MAX_TEMP 90.0
 #define THROTTLE_TEMP 75.0
 #define THROTTLE_TEMP_RANGE (MAX_TEMP - THROTTLE_TEMP)
@@ -47,7 +52,7 @@ void POWER_MANAGEMENT_task(void * pvParameters)
     // Initialize PID controller
     pid_setPoint = (double)nvs_config_get_u16(NVS_CONFIG_TEMP_TARGET, pid_setPoint);
     pid_init(&pid, &pid_input, &pid_output, &pid_setPoint, pid_p, pid_i, pid_d, PID_P_ON_E, PID_DIRECT);
-    pid_set_sample_time(&pid, POLL_RATE - 1);
+    pid_set_sample_time(&pid, POLL_RATE_NORMAL - 1);
     pid_set_output_limits(&pid, 25, 100);
     pid_set_mode(&pid, AUTOMATIC);
     pid_set_controller_direction(&pid, PID_REVERSE);
@@ -64,6 +69,8 @@ void POWER_MANAGEMENT_task(void * pvParameters)
     vTaskDelay(500 / portTICK_PERIOD_MS);
     uint16_t last_core_voltage = 0.0;
     uint16_t last_asic_frequency = power_management->frequency_value;
+    uint16_t poll_rate = POLL_RATE_NORMAL;
+    int64_t breath_start_us = 0;
     
     while (1) {
 
@@ -138,10 +145,24 @@ void POWER_MANAGEMENT_task(void * pvParameters)
         uint16_t core_voltage = nvs_config_get_u16(NVS_CONFIG_ASIC_VOLTAGE, CONFIG_ASIC_VOLTAGE);
         uint16_t asic_frequency = nvs_config_get_u16(NVS_CONFIG_ASIC_FREQ, CONFIG_ASIC_FREQUENCY);
 
-        if (core_voltage != last_core_voltage) {
-            ESP_LOGI(TAG, "setting new vcore voltage to %umV", core_voltage);
-            VCORE_set_voltage((double) core_voltage / 1000.0, GLOBAL_STATE);
-            last_core_voltage = core_voltage;
+        bool breathing_active = (asic_frequency == BREATH_FREQ) && (core_voltage == BREATH_VCORE);
+
+        if (breathing_active) {
+            if (breath_start_us == 0) {
+                breath_start_us = esp_timer_get_time();
+            }
+            double t = (double)(esp_timer_get_time() - breath_start_us) / 1000000.0;
+            float v = voltage_breathing(t, (float)core_voltage / 1000.0f);
+            VCORE_set_voltage(v, GLOBAL_STATE);
+            poll_rate = POLL_RATE_BREATHING;
+        } else {
+            breath_start_us = 0;
+            if (core_voltage != last_core_voltage) {
+                ESP_LOGI(TAG, "setting new vcore voltage to %umV", core_voltage);
+                VCORE_set_voltage((double) core_voltage / 1000.0, GLOBAL_STATE);
+                last_core_voltage = core_voltage;
+            }
+            poll_rate = POLL_RATE_NORMAL;
         }
 
         if (asic_frequency != last_asic_frequency) {
@@ -167,6 +188,6 @@ void POWER_MANAGEMENT_task(void * pvParameters)
         VCORE_check_fault(GLOBAL_STATE);
 
         // looper:
-        vTaskDelay(POLL_RATE / portTICK_PERIOD_MS);
+        vTaskDelay(poll_rate / portTICK_PERIOD_MS);
     }
 }
