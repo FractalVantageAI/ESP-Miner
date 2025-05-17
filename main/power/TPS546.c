@@ -310,6 +310,7 @@ static uint16_t float_2_ulinear16(float value)
 {
     uint8_t voutmode;
     float exponent;
+    float scaled;
     uint16_t result;
 
     smb_read_byte(PMBUS_VOUT_MODE, &voutmode);
@@ -320,7 +321,8 @@ static uint16_t float_2_ulinear16(float value)
         exponent = (voutmode & 0x1F);
     }
 
-    result = (value / powf(2.0, exponent));
+    scaled = value / powf(2.0, exponent);
+    result = (uint16_t)ceilf(scaled);
 
     return result;
 }
