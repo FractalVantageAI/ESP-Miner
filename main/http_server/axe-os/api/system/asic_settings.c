@@ -54,6 +54,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         // BM1370 voltage options
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1000));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1060));
+        cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1073));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1100));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1150));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1200));
@@ -73,6 +74,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(575));
 
         // BM1368 voltage options
+        cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1073));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1100));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1150));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1166));
@@ -93,6 +95,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(575));
 
         // BM1366 voltage options
+        cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1073));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1100));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1150));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1200));
@@ -113,6 +116,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(600));
 
         // BM1397 voltage options
+        cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1073));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1100));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1150));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1200));
@@ -129,6 +133,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(425));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(450));
 
+        cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1073));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1200));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1250));
         cJSON_AddItemToArray(voltageOptions, cJSON_CreateNumber(1300));

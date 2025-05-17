@@ -137,7 +137,7 @@ export class SystemService {
       return of({
         ASICModel: eASICModel.BM1366,
         frequencyOptions: [400, 425, 450, 475, 485, 500, 525, 550, 575],
-        voltageOptions: [1100, 1150, 1200, 1250, 1300]
+        voltageOptions: [1073, 1100, 1150, 1200, 1250, 1300]
       }).pipe(delay(1000));
     }
   }

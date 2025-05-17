@@ -509,7 +509,7 @@ paths:
                     items:
                       type: number
                     examples:
-                      - [1100, 1150, 1200, 1250, 1300]
+                      - [1073, 1100, 1150, 1200, 1250, 1300]
         '401':
           description: Unauthorized - Client not in allowed network range
         '500':
