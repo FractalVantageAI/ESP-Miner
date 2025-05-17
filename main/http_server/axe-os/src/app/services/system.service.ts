@@ -54,7 +54,7 @@ export class SystemService {
           stratumUser: "bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d.bitaxe-U1",
           fallbackStratumUser: "bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d.bitaxe-U1",
           isUsingFallbackStratum: true,
-          frequency: 485,
+          frequency: 540,
           version: "2.0",
           idfVersion: "v5.1.2",
           boardVersion: "204",
@@ -136,7 +136,7 @@ export class SystemService {
       // Mock data for development
       return of({
         ASICModel: eASICModel.BM1366,
-        frequencyOptions: [400, 425, 450, 475, 485, 500, 525, 550, 575],
+        frequencyOptions: [400, 425, 450, 475, 485, 500, 525, 540, 550, 575],
         voltageOptions: [1100, 1150, 1200, 1250, 1300]
       }).pipe(delay(1000));
     }

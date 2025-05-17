@@ -47,6 +47,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(400));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(490));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(525));
+        cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(540));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(550));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(600));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(625));
@@ -69,6 +70,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(490));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(500));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(525));
+        cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(540));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(550));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(575));
 
@@ -89,6 +91,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(485));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(500));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(525));
+        cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(540));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(550));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(575));
 
@@ -108,6 +111,7 @@ esp_err_t GET_system_asic(httpd_req_t *req)
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(485));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(500));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(525));
+        cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(540));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(550));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(575));
         cJSON_AddItemToArray(freqOptions, cJSON_CreateNumber(600));

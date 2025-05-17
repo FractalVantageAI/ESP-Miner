@@ -502,7 +502,7 @@ paths:
                     items:
                       type: number
                     examples:
-                      - [400, 425, 450, 475, 485, 500, 525, 550, 575]
+                      - [400, 425, 450, 475, 485, 500, 525, 540, 550, 575]
                   voltageOptions:
                     type: array
                     description: Available voltage options for the ASIC model in millivolts
